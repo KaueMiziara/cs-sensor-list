@@ -8,34 +8,40 @@
         x:Class="SensorList.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="SensorList">
-
+        Title="SensorList"
+        Width="800" Height="800">
+ 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
     
     <Border Padding="50">
-        <Grid RowDefinitions="*,*,8*">
-            <Border Grid.Row="0" Background="RoyalBlue">
+        <Grid RowDefinitions="0.5*,*,8*">
+            <Border Grid.Row="0" Background="DodgerBlue" CornerRadius="50">
                 <Label Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center">
                     Sensor List
                 </Label>
             </Border>
             
             <Grid Grid.Row="1" ColumnDefinitions="Auto,*">
-                <Button Grid.Column="0" Margin="5">Add item</Button>
-                <TextBox Grid.Column="1" Margin="5" Watermark="Search for item"/>
+                <Button Grid.Column="0" Background="DodgerBlue" Margin="5" CornerRadius="15">
+                    Add item
+                </Button>
+                <TextBox Grid.Column="1" Margin="15" CornerRadius="15"
+                         Watermark="Search for item" Height="1"/>
             </Grid>
             
-            <Border Grid.Row="2" Background="DarkGray">
-                <ListBox>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <views:SensorItemView/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                    abc
-                </ListBox>
+            <Border Grid.Row="2">
+                <ScrollViewer>
+                    <ListBox CornerRadius="20">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <views:SensorItemView CornerRadius="15"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        abcdefgh
+                    </ListBox>
+                </ScrollViewer>
             </Border>
         </Grid>
     </Border>
