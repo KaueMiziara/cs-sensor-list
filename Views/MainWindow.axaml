@@ -33,13 +33,12 @@
             
             <Border Grid.Row="2">
                 <ScrollViewer>
-                    <ListBox CornerRadius="20">
+                    <ListBox Items="{Binding Sensors}" CornerRadius="20">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <views:SensorItemView CornerRadius="15"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
-                        abcdefgh
                     </ListBox>
                 </ScrollViewer>
             </Border>
