@@ -6,11 +6,12 @@
              x:Class="SensorList.Views.SensorItemView">
     
     <StackPanel Margin="15">
-        <Grid ColumnDefinitions="*,auto,auto,auto">
-            <TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="0">Item name</TextBlock>
-            <TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="1">Item category</TextBlock>
-            <TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">Amount</TextBlock>
-            <Button Margin="5" VerticalAlignment="Center" Grid.Column="3" CornerRadius="10">Delete</Button>
+        <Grid ColumnDefinitions="auto,*,auto,auto,auto">
+            <TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="0">ID</TextBlock>
+            <TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="1">Item name</TextBlock>
+            <TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">Item category</TextBlock>
+            <TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="3">Amount</TextBlock>
+            <Button Margin="5" VerticalAlignment="Center" Grid.Column="4" CornerRadius="10">Delete</Button>
         </Grid>
     </StackPanel>
 </UserControl>
