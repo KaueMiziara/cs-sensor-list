@@ -39,6 +39,11 @@ public class SensorRepository : ISensorRepository
     {
         CheckIsNameOrCategoryNull(sensor);
 
+        if (sensor.Amount < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(sensor.Amount), "Item amount cannot be negative.");
+        }
+
         _dbContext.Sensors.Add(sensor);
         _dbContext.SaveChanges();
     }

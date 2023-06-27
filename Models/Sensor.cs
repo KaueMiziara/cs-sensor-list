@@ -15,5 +15,6 @@ public class Sensor
     [Required]
     public string Category { get; set; } = string.Empty;
     
+    [Range(0, int.MaxValue, ErrorMessage = "Amount must be a non-negative value.")]
     public int Amount { get; set; } = 0;
 }
