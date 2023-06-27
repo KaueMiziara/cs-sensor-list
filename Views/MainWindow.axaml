@@ -15,7 +15,6 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
     
-    <!-- TODO Delete item-->
     <!-- TODO Update item-->
     <!-- TODO Search for item-->
     

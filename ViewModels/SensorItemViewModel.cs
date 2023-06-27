@@ -1,3 +1,4 @@
+using System;
 using System.Reactive;
 using ReactiveUI;
 using SensorList.DAL;
@@ -9,6 +10,8 @@ public class SensorItemViewModel : ViewModelBase
 {
     private Sensor _sensor;
     private readonly ISensorRepository _sensorRepository;
+
+    public event Action SensorDeleted;
 
     public int Id => _sensor.Id;
 
@@ -43,5 +46,7 @@ public class SensorItemViewModel : ViewModelBase
     private void DeleteItem()
     {
         _sensorRepository.DeleteSensor(_sensor);
+        
+        SensorDeleted?.Invoke();
     }
 }

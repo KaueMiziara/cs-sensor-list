@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
 using Avalonia.Controls;
@@ -11,12 +12,12 @@ namespace SensorList.ViewModels;
 public class MainWindowViewModel : ViewModelBase
 {
     private readonly ISensorRepository _sensorRepository;
-    private List<SensorItemViewModel> _sensors;
+    private ObservableCollection<SensorItemViewModel> _sensors;
 
     public static Window AppMainWindow;
     public ReactiveCommand<Unit, Unit> AddNewItemCommand { get; }
 
-    public List<SensorItemViewModel> Sensors
+    public ObservableCollection<SensorItemViewModel> Sensors
     {
         get => _sensors;
         set => this.RaiseAndSetIfChanged(ref _sensors, value);
@@ -33,9 +34,13 @@ public class MainWindowViewModel : ViewModelBase
     private void LoadSensors()
     {
         var sensors = _sensorRepository.GetAllSensors();
-        Sensors = new List<SensorItemViewModel>(
+        Sensors = new ObservableCollection<SensorItemViewModel>(
             sensors.Select(sensor => new SensorItemViewModel(_sensorRepository, sensor))
             );
+        foreach (var sensorVM in Sensors)
+        {
+            sensorVM.SensorDeleted += OnSensorDeleted;
+        }
     }
 
     private async void AddNewItem()
@@ -55,6 +60,11 @@ public class MainWindowViewModel : ViewModelBase
         };
         await dialog.ShowDialog(AppMainWindow);
         
+        LoadSensors();
+    }
+
+    private void OnSensorDeleted()
+    {
         LoadSensors();
     }
 }
