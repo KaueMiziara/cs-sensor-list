@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
-using Avalonia;
 using Avalonia.Controls;
 using ReactiveUI;
 using SensorList.DAL;
@@ -40,9 +38,11 @@ public class MainWindowViewModel : ViewModelBase
             );
     }
 
-    private void AddNewItem()
+    private async void AddNewItem()
     {
-        var createSensorView = new CreateSensorView();
+        var createSensorViewModel = new CreateSensorViewModel(_sensorRepository);
+        var createSensorView = new CreateSensorView { ViewModel = createSensorViewModel };
+        createSensorView.ViewModel.CloseDialogAction = createSensorView.CloseDialog;
         var dialog = new Window
         {
             Content = createSensorView,
@@ -52,6 +52,8 @@ public class MainWindowViewModel : ViewModelBase
             WindowStartupLocation = WindowStartupLocation.CenterOwner,
             CanResize = false
         };
-        dialog.ShowDialog(AppMainWindow);
+        await dialog.ShowDialog(AppMainWindow);
+        
+        LoadSensors();
     }
 }

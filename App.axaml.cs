@@ -9,6 +9,8 @@ namespace SensorList;
 
 public partial class App : Application
 {
+    private readonly ISensorRepository _sensorRepository = new SensorRepository();
+    
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -20,7 +22,7 @@ public partial class App : Application
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel(new SensorRepository()),
+                DataContext = new MainWindowViewModel(_sensorRepository),
             };
         }
 

@@ -2,17 +2,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewmodels="using:SensorList.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SensorList.Views.CreateSensorView">
     
     <Grid Margin="10">
+        <Design.DataContext>
+            <viewmodels:CreateSensorViewModel/>
+        </Design.DataContext>
+        
         <StackPanel Orientation="Vertical">
             <TextBlock Text="Name"/>
-            <TextBox x:Name="txtName"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
             <TextBlock Text="Category"/>
-            <TextBox x:Name="txtCategory"/>
+            <TextBox Text="{Binding Category, Mode=TwoWay}"/>
             <TextBlock Text="Amount"/>
-            <TextBox x:Name="txtAmount"/>
+            <TextBox Text="{Binding Amount, Mode=TwoWay}"/>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Background="DodgerBlue" Margin="5" CornerRadius="15"
+                        Content="Add" Command="{Binding CreateCommand}"/>
+                <Button Background="DodgerBlue" Margin="5" CornerRadius="15"
+                        Content="Cancel" Command="{Binding CloseDialogCommand}"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>
