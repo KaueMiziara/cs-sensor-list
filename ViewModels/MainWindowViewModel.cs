@@ -34,7 +34,7 @@ public class MainWindowViewModel : ViewModelBase
     {
         var sensors = _sensorRepository.GetAllSensors();
         Sensors = new List<SensorItemViewModel>(
-            sensors.Select(sensor => new SensorItemViewModel(sensor))
+            sensors.Select(sensor => new SensorItemViewModel(_sensorRepository, sensor))
             );
     }
 
@@ -43,6 +43,7 @@ public class MainWindowViewModel : ViewModelBase
         var createSensorViewModel = new CreateSensorViewModel(_sensorRepository);
         var createSensorView = new CreateSensorView { ViewModel = createSensorViewModel };
         createSensorView.ViewModel.CloseDialogAction = createSensorView.CloseDialog;
+        
         var dialog = new Window
         {
             Content = createSensorView,

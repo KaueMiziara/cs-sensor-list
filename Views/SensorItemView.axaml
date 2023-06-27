@@ -16,7 +16,8 @@
             <TextBlock Text="{Binding Name}" Margin="5" VerticalAlignment="Center" Grid.Column="1"/>
             <TextBlock Text="{Binding Category}" Margin="5" VerticalAlignment="Center" Grid.Column="2"/>
             <TextBlock Text="{Binding Amount}" Margin="5" VerticalAlignment="Center" Grid.Column="3"/>
-            <Button Margin="5" VerticalAlignment="Center" Grid.Column="4" CornerRadius="10">Delete</Button>
+            <Button Margin="5" VerticalAlignment="Center" Grid.Column="4" CornerRadius="10"
+                    Content="Delete" Command="{Binding DeleteItemCommand}"/>
         </Grid>
     </StackPanel>
 </UserControl>

@@ -1,3 +1,6 @@
+using System.Reactive;
+using ReactiveUI;
+using SensorList.DAL;
 using SensorList.Models;
 
 namespace SensorList.ViewModels;
@@ -5,6 +8,7 @@ namespace SensorList.ViewModels;
 public class SensorItemViewModel : ViewModelBase
 {
     private Sensor _sensor;
+    private readonly ISensorRepository _sensorRepository;
 
     public int Id => _sensor.Id;
 
@@ -26,8 +30,18 @@ public class SensorItemViewModel : ViewModelBase
         set => _sensor.Amount = value;
     }
 
-    public SensorItemViewModel(Sensor sensor)
+    public ReactiveCommand<Unit, Unit> DeleteItemCommand { get; }
+
+    public SensorItemViewModel(ISensorRepository sensorRepository, Sensor sensor)
     {
+        _sensorRepository = sensorRepository;
         _sensor = sensor;
+        
+        DeleteItemCommand = ReactiveCommand.Create(DeleteItem);
+    }
+
+    private void DeleteItem()
+    {
+        _sensorRepository.DeleteSensor(_sensor);
     }
 }
