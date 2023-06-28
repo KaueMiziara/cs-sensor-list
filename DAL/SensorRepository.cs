@@ -19,20 +19,16 @@ public class SensorRepository : ISensorRepository
         return _dbContext.Sensors.ToList();
     }
 
-    public Sensor GetSensorById(int id)
+    public List<Sensor> GetSensorByName(string name)
     {
-        var sensor = _dbContext.Sensors.FirstOrDefault(s => s.Id == id);
-        CheckFoundSensor(sensor);
-
-        return sensor;
+        var query = name.ToLower();
+        return _dbContext.Sensors.Where(s => s.Category.Contains(query)).ToList();
     }
 
-    public Sensor GetSensorByCategory(string category)
+    public List<Sensor> GetSensorByCategory(string category)
     {
-        var sensor = _dbContext.Sensors.FirstOrDefault(s => s.Category == category);
-        CheckFoundSensor(sensor);
-
-        return sensor;
+        var query = category.ToLower();
+        return _dbContext.Sensors.Where(s => s.Category.Contains(query)).ToList();
     }
 
     public void AddSensor(Sensor sensor)
@@ -60,14 +56,6 @@ public class SensorRepository : ISensorRepository
     {
         _dbContext.Sensors.Remove(sensor);
         _dbContext.SaveChanges();
-    }
-
-    private static void CheckFoundSensor(Sensor? sensor)
-    {
-        if (sensor == null)
-        {
-            throw new ArgumentException("Sensor not found.");
-        }
     }
 
     private static void CheckIsNameOrCategoryNull(Sensor sensor)
