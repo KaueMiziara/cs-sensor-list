@@ -15,8 +15,6 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
     
-    <!-- TODO Search for item-->
-    
     <Border Padding="50">
         <Grid RowDefinitions="0.5*,*,8*">
             <!-- Title Bar -->
@@ -30,8 +28,15 @@
             <Grid Grid.Row="1" ColumnDefinitions="Auto,*">
                 <Button Grid.Column="0" Background="DodgerBlue" Margin="5" CornerRadius="15"
                         Content="Add New Item" Command="{Binding AddNewItemCommand}"/>
-                <TextBox Grid.Column="1" Margin="15" CornerRadius="15"
-                         Watermark="Search for item" Height="1"/>
+                
+                <Grid Grid.Column="1" ColumnDefinitions="*,*">
+                    <TextBox Grid.Column="0" Margin="15" CornerRadius="15" Height="1"
+                             Watermark="Search name"
+                             Text="{Binding SearchName, Mode=TwoWay}"/>
+                    <TextBox Grid.Column="1" Margin="15" CornerRadius="15" Height="1"
+                             Watermark="Search category"
+                             Text="{Binding SearchCategory, Mode=TwoWay}"/>
+                </Grid>
             </Grid>
             
             <!-- Item List -->

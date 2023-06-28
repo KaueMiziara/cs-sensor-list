@@ -21,14 +21,12 @@ public class SensorRepository : ISensorRepository
 
     public List<Sensor> GetSensorByName(string name)
     {
-        var query = name.ToLower();
-        return _dbContext.Sensors.Where(s => s.Category.Contains(query)).ToList();
+        return _dbContext.Sensors.Where(s => s.Name.Contains(name)).ToList();
     }
 
     public List<Sensor> GetSensorByCategory(string category)
     {
-        var query = category.ToLower();
-        return _dbContext.Sensors.Where(s => s.Category.Contains(query)).ToList();
+        return _dbContext.Sensors.Where(s => s.Category.Contains(category)).ToList();
     }
 
     public void AddSensor(Sensor sensor)
