@@ -1,3 +1,4 @@
+using System;
 using Microsoft.EntityFrameworkCore;
 using SensorList.Models;
 
@@ -7,8 +8,10 @@ public class SensorDbContext : DbContext
 {
     public DbSet<Sensor> Sensors { get; set; }
 
+    // Remember to create your Connection class with a valid connection string
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite("Data Source=sensors.db");
+        optionsBuilder.UseMySql(Connection.ConnectionString,
+            new MariaDbServerVersion(new Version(Connection.ServerVersion)));
     }
 }
