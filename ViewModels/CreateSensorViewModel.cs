@@ -13,7 +13,7 @@ public class CreateSensorViewModel : ViewModelBase
     public ReactiveCommand<Unit, Unit> CreateCommand { get; }
     public ReactiveCommand<Unit, Unit> CloseDialogCommand { get; }
     
-    public Action CloseDialogAction { get; set; }
+    public Action? CloseDialogAction { get; set; }
 
     public CreateSensorViewModel(ISensorRepository sensorRepository)
     {
@@ -23,16 +23,16 @@ public class CreateSensorViewModel : ViewModelBase
         CloseDialogCommand = ReactiveCommand.Create(CloseDialog);
     }
 
-    private string _name;
-    private string _category;
+    private string? _name;
+    private string? _category;
     private int _amount;
 
-    public string Name
+    public string? Name
     {
         get => _name;
         set => this.RaiseAndSetIfChanged(ref _name, value);
     }
-    public string Category
+    public string? Category
     {
         get => _category;
         set => this.RaiseAndSetIfChanged(ref _category, value);

@@ -16,17 +16,17 @@ public class SensorRepository : ISensorRepository
     
     public IEnumerable<Sensor> GetAllSensors()
     {
-        return _dbContext.Sensors.ToList();
+        return _dbContext.Sensors!.ToList();
     }
 
-    public List<Sensor> GetSensorByName(string name)
+    public List<Sensor> GetSensorByName(string? name)
     {
-        return _dbContext.Sensors.Where(s => s.Name.Contains(name)).ToList();
+        return _dbContext.Sensors!.Where(s => s.Name!.Contains(name)).ToList();
     }
 
-    public List<Sensor> GetSensorByCategory(string category)
+    public List<Sensor> GetSensorByCategory(string? category)
     {
-        return _dbContext.Sensors.Where(s => s.Category.Contains(category)).ToList();
+        return _dbContext.Sensors!.Where(s => s.Category != null && s.Category.Contains(category)).ToList();
     }
 
     public void AddSensor(Sensor sensor)
@@ -38,7 +38,7 @@ public class SensorRepository : ISensorRepository
             throw new ArgumentOutOfRangeException(nameof(sensor.Amount), "Item amount cannot be negative.");
         }
 
-        _dbContext.Sensors.Add(sensor);
+        _dbContext.Sensors!.Add(sensor);
         _dbContext.SaveChanges();
     }
 
@@ -46,13 +46,13 @@ public class SensorRepository : ISensorRepository
     {
         CheckIsNameOrCategoryNull(sensor);
         
-        _dbContext.Sensors.Update(sensor);
+        _dbContext.Sensors!.Update(sensor);
         _dbContext.SaveChanges();
     }
 
     public void DeleteSensor(Sensor sensor)
     {
-        _dbContext.Sensors.Remove(sensor);
+        _dbContext.Sensors!.Remove(sensor);
         _dbContext.SaveChanges();
     }
 

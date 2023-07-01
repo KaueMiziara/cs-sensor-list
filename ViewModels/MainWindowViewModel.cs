@@ -14,29 +14,29 @@ namespace SensorList.ViewModels;
 public class MainWindowViewModel : ViewModelBase
 {
     private readonly ISensorRepository _sensorRepository;
-    private ObservableCollection<SensorItemViewModel> _sensors;
+    private ObservableCollection<SensorItemViewModel>? _sensors;
 
-    public static Window AppMainWindow;
+    public static Window? AppMainWindow;
     public ReactiveCommand<Unit, Unit> AddNewItemCommand { get; }
-    public event PropertyChangedEventHandler PropertyChanged;
+    public new event PropertyChangedEventHandler? PropertyChanged;
 
-    public ObservableCollection<SensorItemViewModel> Sensors
+    public ObservableCollection<SensorItemViewModel>? Sensors
     {
         get => _sensors;
         set => this.RaiseAndSetIfChanged(ref _sensors, value);
     }
 
-    private string _searchName;
-    private string _searchCategory;
+    private string? _searchName;
+    private string? _searchCategory;
     
-    public string SearchName
+    public string? SearchName
     {
         get => _searchName; 
         set => SetProperty(ref _searchName, value, nameof(SearchName));
 
     }
     
-    public string SearchCategory
+    public string? SearchCategory
     {
         get => _searchCategory;
         set => SetProperty(ref _searchCategory, value, nameof(SearchCategory));
@@ -66,9 +66,9 @@ public class MainWindowViewModel : ViewModelBase
         Sensors = new ObservableCollection<SensorItemViewModel>(
             sensors.Select(sensor => new SensorItemViewModel(_sensorRepository, sensor))
             );
-        foreach (var sensorVM in Sensors)
+        foreach (var sensorViewModel in Sensors)
         {
-            sensorVM.SensorDeleted += OnSensorDeleted;
+            sensorViewModel.SensorDeleted += OnSensorDeleted;
         }
     }
 

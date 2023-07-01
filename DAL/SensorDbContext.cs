@@ -6,7 +6,7 @@ namespace SensorList.DAL;
 
 public class SensorDbContext : DbContext
 {
-    public DbSet<Sensor> Sensors { get; set; }
+    public DbSet<Sensor>? Sensors { get; set; }
 
     // Remember to create your Connection class with a valid connection string
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

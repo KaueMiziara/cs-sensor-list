@@ -9,21 +9,21 @@ namespace SensorList.ViewModels;
 
 public class SensorItemViewModel : ViewModelBase
 {
-    private Sensor _sensor;
+    private readonly Sensor _sensor;
     private readonly ISensorRepository _sensorRepository;
 
-    public event PropertyChangedEventHandler PropertyChanged;
-    public event Action SensorDeleted;
+    public new event PropertyChangedEventHandler? PropertyChanged;
+    public event Action? SensorDeleted;
 
     public int Id => _sensor.Id;
 
-    public string Name
+    public string? Name
     {
         get => _sensor.Name;
         set => _sensor.Name = value;
     }
 
-    public string Category
+    public string? Category
     {
         get => _sensor.Category;
         set => _sensor.Category = value;
@@ -76,7 +76,7 @@ public class SensorItemViewModel : ViewModelBase
         PropertyChanged += SensorItemViewModel_PropertyChanged;
     }
 
-    private void SensorItemViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    private void SensorItemViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(Amount))
         {
