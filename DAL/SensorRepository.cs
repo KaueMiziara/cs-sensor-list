@@ -38,6 +38,12 @@ public class SensorRepository : ISensorRepository
             throw new ArgumentOutOfRangeException(nameof(sensor.Amount), "Item amount cannot be negative.");
         }
 
+        var existingSensor = GetSensorByName(sensor.Name).FirstOrDefault();
+        if (existingSensor != null)
+        {
+            throw new ArgumentException($"A sensor with the name '{sensor.Name}' already exists.");
+        }
+
         _dbContext.Sensors!.Add(sensor);
         _dbContext.SaveChanges();
     }
