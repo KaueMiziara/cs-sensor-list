@@ -21,12 +21,12 @@ public class SensorRepository : ISensorRepository
 
     public List<Sensor> GetSensorByName(string? name)
     {
-        return _dbContext.Sensors!.Where(s => s.Name!.Contains(name)).ToList();
+        return _dbContext.Sensors!.Where(s => s.Name!.Contains(name!)).ToList();
     }
 
     public List<Sensor> GetSensorByCategory(string? category)
     {
-        return _dbContext.Sensors!.Where(s => s.Category != null && s.Category.Contains(category)).ToList();
+        return _dbContext.Sensors!.Where(s => s.Category != null && s.Category.Contains(category!)).ToList();
     }
 
     public void AddSensor(Sensor sensor)
@@ -41,7 +41,7 @@ public class SensorRepository : ISensorRepository
         var existingSensor = GetSensorByName(sensor.Name).FirstOrDefault();
         if (existingSensor != null)
         {
-            throw new ArgumentException($"A sensor with the name '{sensor.Name}' already exists.");
+            throw new ArgumentException($"A sensor named '{sensor.Name}' already exists.");
         }
 
         _dbContext.Sensors!.Add(sensor);
@@ -68,7 +68,7 @@ public class SensorRepository : ISensorRepository
         
         if (isNullOrEmpty)
         {
-            throw new ArgumentException("Name and Type cannot be null or empty.");
+            throw new ArgumentException("Name or Category field is null or empty.");
         }
     }
 }

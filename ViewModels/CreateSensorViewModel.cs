@@ -26,6 +26,7 @@ public class CreateSensorViewModel : ViewModelBase
     private string? _name;
     private string? _category;
     private int _amount;
+    private string? _errorMessage;
 
     public string? Name
     {
@@ -42,7 +43,12 @@ public class CreateSensorViewModel : ViewModelBase
         get => _amount;
         set => this.RaiseAndSetIfChanged(ref _amount, value);
     }
-
+    public string? ErrorMessage
+    {
+        get => _errorMessage;
+        set => this.RaiseAndSetIfChanged(ref _errorMessage, value);
+    }
+    
     private void CreateSensor()
     {
         Sensor newSensor = new Sensor()
@@ -51,10 +57,17 @@ public class CreateSensorViewModel : ViewModelBase
             Category = _category,
             Amount = _amount
         };
+
+        try
+        {
+            _sensorRepository.AddSensor(newSensor);
         
-        _sensorRepository.AddSensor(newSensor);
-        
-        CloseDialog();
+            CloseDialog();
+        }
+        catch (Exception e)
+        {
+            ErrorMessage = $"Error: {e.Message}";
+        }
     }
 
     private void CloseDialog()

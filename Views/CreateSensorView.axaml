@@ -17,6 +17,10 @@
             <TextBlock Text="Amount"/>
             <TextBox Text="{Binding Amount, Mode=TwoWay}"/>
             
+            <TextBlock Text="{Binding ErrorMessage}"
+                       Foreground="Red"
+                       TextWrapping="Wrap"/>
+            
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Background="DodgerBlue" Margin="5" CornerRadius="15"
                         Content="Add" Command="{Binding CreateCommand}"/>
