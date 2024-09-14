@@ -19,19 +19,6 @@
 
 
 ## Introduction
-I have been studying programming for some time now, and
-although I have gained knowledge and experience, I still
-consider myself relatively new to developing more complex
-applications.
-To challenge myself and further enhance my skills, I asked
-ChatGPT to generate project ideas in various difficulty
-levels for my main programming languages.
-
-For the first project in C#, the initial suggestion was 
-to develop a generic TODO list. While this idea is widely
-used and familiar to many beginner programmers, I wanted to
-take on a more distinctive and personally meaningful project.
-
 I have a collection of electronic sensors that I use for
 various purposes, and was keeping track of them using a
 simple text file. This project aims to provide a better
